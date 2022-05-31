@@ -1,0 +1,366 @@
+//sound in p5js
+
+let adventuretime;
+let overthegardenwall;
+let stevenuniverse;
+let volume;
+let x = [0,500];
+
+//----------Stage Assets----------------
+
+    //---------Stage 1----------
+let ballerina; //stage 1 - spinning ballerina
+    
+    //-----------Stage 2----------
+let bumble; //stage 2 - bumble bee
+let butter; // stage 2 - butterfly
+let dancingGirls; //stage 2 - dancing bubblegum and marceline
+    let dg = 200;
+let flamePrincess; //stage 2 - flame Princess
+    let fp = -300;
+let gunter; //stage 2 - gunter the penguin
+    let gp = -800
+
+let bug = 1; //changes bug you are flying with
+
+    //-----------Stage 3----------
+
+let garnetFusion; //stage 3 - saphire and ruby spinning
+
+let fallingPetals; // falling flower petals
+let petalX = 200; //petals initial setting
+let cherryblossom; // image of cherry blossom
+  let petalArray;
+  let petalimgOne;
+  let petalimgTwo;
+  let petalimgThree;
+  let petalobjOne;
+  let petalobjTwo;
+  let petalobjThree;
+  let petals = [0,2];
+
+//--------------------------------------
+
+let stage
+let val;
+
+let amplitude; // for audio reactive visuals
+
+
+function preload (){
+  // imageMode(CENTER);
+  
+  adventuretime = loadSound('adventure.mp3');
+    
+  overthegardenwall = loadSound('overthegarden.mp3');
+  
+  stevenuniverse = loadSound('steven.mp3');
+}
+ 
+function setup() {
+  
+  imageMode(CENTER);
+  createCanvas(400, 400);
+  amp = new p5.Amplitude();
+  overthegardenwall.play();
+  stage = 1;
+  
+  adventuretime.playMode('restart');
+  overthegardenwall.playMode('restart');
+  stevenuniverse.playMode('restart');
+  
+  ballerina=loadImage('ballerina.gif');
+  bumble = loadImage('babybee.png');
+  butter = loadImage('butterfly.png');
+  dancingGirls = loadImage('dancinggals.gif');
+  garnetFusion = loadImage('garnet.gif');
+  flamePrincess = loadImage('flameP.gif');
+  gunter = loadImage('gunter.gif');
+  petalimgOne = loadImage('PetalOne.png');
+  petalimgTwo = loadImage('PetalTwo.png');
+  petalimgThree = loadImage('PetalThree.png')
+  
+  petalArray = [petalimgTwo, petalimgThree, petalimgOne];
+  
+  // ---------Class Declaration-----------
+  
+  petalobjOne = new Petal();
+  petalobjTwo = new Petal();
+  petalobjThree = new Petal();
+  petalobjFour = new Petal();
+  petalobjFive = new Petal();
+  petalobjSix = new Petal();
+  petalobjSeven = new Petal();
+  petalobjEight = new Petal();
+  petalobjNine = new Petal();
+  petalobjTen = new Petal();
+  petalobjEleven = new Petal();
+  petalobjTwelve = new Petal();
+  petalobjThirteen = new Petal();
+  petalobjFourteen = new Petal();
+  petalobjFifteen = new Petal();
+  petalobjSixteen = new Petal();
+  petalobjSeventeen = new Petal();
+  petalobjEighteen = new Petal();
+  petalobjNineteen = new Petal();
+  petalobjTwenty = new Petal();
+  
+//--------------------------------------
+  
+}
+
+function draw() {
+  background(0);
+  //print(stage);
+  
+  if(stage == 1){
+    stageOne();
+  }
+  
+  if(stage == 2){
+    stageTwo();
+  }
+  
+  if(stage == 3){
+    stageThree();
+  }
+  
+   
+}
+
+function mouseReleased(){
+ bug = bug + 1; 
+}
+
+function keyTyped(){
+  
+  if (keyCode == ENTER){
+
+//------------Stages----------------------
+  //print(stage) 
+  stage = stage + 1; //what stage you are on is listed
+  
+  
+  if (stage > 3){
+  stage = 1;
+  } //reset stage
+
+    
+  if(stage == 1){
+    stevenuniverse.stop();
+  overthegardenwall.play();
+  }
+  
+  if(stage == 2){
+    overthegardenwall.stop();
+    adventuretime.play();
+  }
+  
+  if(stage == 3){
+    adventuretime.stop();
+    stevenuniverse.play();
+  }
+  
+}
+  
+}
+
+//-----------------------------------------
+function stageOne(){
+  
+  
+  volume =  amp.getLevel();
+  //print (volume);
+  
+
+  
+  //---------------Circle One---------------
+  noStroke();
+  fill(47,34,53); //bright orange
+  circle(20,20,10);
+  fill(191,195,184,40); //light gray
+  circle(20,20,volume*500);
+  
+  //----------------Circle Two--------------
+  fill(47,34,53); //bright orange
+  circle(300,100,20);
+  fill(191,195,184,40); //light gray
+  circle(300,100,volume*700);
+  
+  //---------------Circle Three------------
+  fill(47,34,53); //bright orange
+  circle(200,175,20);
+  fill(191,195,184,40); //light gray
+  circle(100,200,volume*1000);
+  
+  //--------------Circle Four---------------
+  fill(47,34,53); //bright orange
+  circle(100,200,50);
+  fill(191,195,184,40); //light gray
+  circle(100,200,volume*800);
+  
+  //--------------Circle Five---------------
+  fill(47,34,53); //bright orange
+  circle(370,155,30);
+  fill(191,195,184,40); //light gray
+  circle(370,155,volume*500);
+  
+  //---------------------------------------
+  
+   fill(47,34,53);//eggplant purple
+  rect(0,290,500,500);
+  image(ballerina,200,200,200,200);
+
+}
+
+function stageTwo(){
+  background(173,252,146);
+  
+  fill (155,243,240);
+  rect (0,0,500,300);
+  
+//-----------------Bug Mechanics----------
+  // if (mouseIsPressed == true){
+  //   bug = bug + 1;
+  // }
+  
+  if (bug > 2){
+    bug = 1;
+  }
+  print (bug);
+  
+  if (bug == 1){
+  image(bumble,mouseX,mouseY,100,100);
+  }
+  
+  if (bug == 2){        image(butter,mouseX,mouseY,100,100);
+  }
+
+//--------gifs across screen------------
+  
+  image(dancingGirls, dg,250,300,300);
+  image(flamePrincess,fp,200,300,300);
+  image(gunter,gp,300,400,400);
+  
+      
+  if (mouseX < 20){
+    dg ++;
+    fp ++;
+    gp ++;
+    
+  }
+  
+  if (dg >1275){
+    dg = -100
+  }
+  
+  if (fp > 1125){
+    fp = -250
+  }
+  
+  if (gp > 1125){
+    gp = -270
+  }
+  
+}
+  
+function stageThree(){
+  
+  background(159,36,120);
+  
+  petalobjOne.show();
+  petalobjOne.move();
+  
+  petalobjTwo.show();
+  petalobjTwo.move();
+  
+  petalobjThree.show();
+  petalobjThree.move();
+  
+  petalobjFour.show();
+  petalobjFour.move();
+  
+  petalobjFive.show();
+  petalobjFive.move();
+  
+  petalobjSix.show();
+  petalobjSix.move();
+  
+  petalobjSeven.show();
+  petalobjSeven.move();
+  
+  petalobjEight.show();
+  petalobjEight.move();
+  
+  petalobjNine.show();
+  petalobjNine.move();
+  
+  petalobjTen.show();
+  petalobjTen.move();
+  
+  petalobjEleven.show();
+  petalobjEleven.move();
+  
+  petalobjTwelve.show();
+  petalobjTwelve.move();
+  
+  petalobjThirteen.show();
+  petalobjThirteen.move();
+  
+  petalobjFourteen.show();
+  petalobjFourteen.move();
+  
+  petalobjFifteen.show();
+  petalobjFifteen.move();
+  
+  petalobjSixteen.show();
+  petalobjSixteen.move();
+  
+  petalobjSeventeen.show();
+  petalobjSeventeen.move();
+  
+  petalobjEighteen.show();
+  petalobjEighteen.move();
+  
+  petalobjNineteen.show();
+  petalobjNineteen.move();
+  
+  petalobjTwenty.show();
+  petalobjTwenty.move();
+  
+  image(garnetFusion,200,200,300,300);
+      
+}
+
+//----------Stage 3 Petals Class-----------------
+
+class Petal {
+  
+  constructor(){
+    this.y = random(-400,0);
+    this.x = random(400);
+    this.img = random(petalArray);
+    this.speed = 1;
+   
+  }
+    
+  show() { 
+    image(this.img, this.x, this.y, 20, 20);
+    
+ }
+  
+  move(){
+    this.y++;
+    this.x += random(-this.speed, this.speed);
+    this.y += random(-this.speed, this.speed*2);
+    
+    if(this.y > 400){
+      this.y = random(-300,0);
+      this.x = random(400);
+      this.img = random(petalArray);
+      
+    }
+    
+  }
+  
+}
